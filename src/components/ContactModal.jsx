@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-const SHEET_URL = "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbzKEbF23kDdQuLsDZFhEOlPY-5MXLKH3qlBUeByIY0tX1N-oaapSVmLTg75OAlNGlXd/exec";
 const PRODUCTS = [
   "Aurify Bullion Pro",
   "Aurify Refinex",
@@ -189,16 +189,29 @@ export default function ContactModal({ isOpen, onClose }) {
                   {/* Submit */}
                   <motion.button
                     type="submit"
-                    whileHover={{ opacity: 0.92 }}
-                    whileTap={{ scale: 0.985 }}
+                    disabled={loading}
+                    whileHover={!loading ? { opacity: 0.92 } : {}}
+                    whileTap={!loading ? { scale: 0.985 } : {}}
                     style={{ background: "linear-gradient(90deg, #9FFFFA 0%, #34AFE4 34%, #1D3D70 100%)" }}
-                    className="w-full flex items-center justify-center gap-2.5 text-white border-none rounded-lg py-3.5 text-[13px] sm:text-[14px] font-semibold cursor-pointer tracking-[0.01em] font-[inherit]"
+                    className="w-full flex items-center justify-center gap-2.5 text-white border-none rounded-lg py-3.5 text-[13px] sm:text-[14px] font-semibold cursor-pointer tracking-[0.01em] font-[inherit] disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="22" y1="2" x2="11" y2="13" />
-                      <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                    </svg>
-                    Submit
+                    {loading ? (
+                      <>
+                        <svg className="animate-spin" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" opacity="0.3" />
+                          <path d="M21 12a9 9 0 00-9-9" />
+                        </svg>
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="22" y1="2" x2="11" y2="13" />
+                          <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                        </svg>
+                        Submit
+                      </>
+                    )}
                   </motion.button>
                 </form>
               </>

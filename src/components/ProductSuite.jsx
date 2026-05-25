@@ -37,7 +37,7 @@ export default function ProductSuite() {
   return (
     <section
       ref={ref}
-      className="w-full bg-white px-4 py-14 font-sans sm:px-6 sm:py-16"
+      className="w-full bg-white px-4 py-6 font-sans sm:px-6 sm:py-8"
     >
       <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6 px-4">
         {PRODUCTS.map((product, i) => (

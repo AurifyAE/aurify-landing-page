@@ -59,7 +59,7 @@ export default function HeroSection() {
       );
 
       // ── Hide all bubbles + CTA initially ────────────────────────
-      gsap.set(bubblesRef.current, { opacity: 0, y: 40, scale: 0.92, willChange: "transform, opacity" });
+      gsap.set(bubblesRef.current, { opacity: 0, y: 40, scale: 0.82, willChange: "transform, opacity" });
       gsap.set(ctaRef.current, { opacity: 0, y: 24, willChange: "transform, opacity" });
 
       // ── PINNED timeline: all 4 bubbles with content slide ──────
@@ -93,17 +93,23 @@ export default function HeroSection() {
       });
 
       // ── Slide entire card up so bubbles 3 & 4 come into view ──
+      // pinnedTl.to(cardRef.current, {
+      //   y: () => {
+      //     const contentEl = contentRef.current;
+      //     const cardEl = cardRef.current;
+      //     if (!contentEl || !cardEl) return -300;
+      //     const contentHeight = contentEl.scrollHeight;
+      //     const cardHeight = cardEl.offsetHeight;
+      //     // Slide up by the overflow amount, capped for safety
+      //     const overflow = contentHeight - cardHeight;
+      //     return -Math.min(Math.max(overflow * 0.55, 200), 500);
+      //   },
+      //   duration: 1.2,
+      //   ease: "power2.inOut",
+      // }, "+=0.3");
+
       pinnedTl.to(cardRef.current, {
-        y: () => {
-          const contentEl = contentRef.current;
-          const cardEl = cardRef.current;
-          if (!contentEl || !cardEl) return -300;
-          const contentHeight = contentEl.scrollHeight;
-          const cardHeight = cardEl.offsetHeight;
-          // Slide up by the overflow amount, capped for safety
-          const overflow = contentHeight - cardHeight;
-          return -Math.min(Math.max(overflow * 0.55, 200), 500);
-        },
+        y: -250,
         duration: 1.2,
         ease: "power2.inOut",
       }, "+=0.3");
@@ -185,7 +191,7 @@ export default function HeroSection() {
         </div>
 
         {/* ── PINNED GRADIENT CARD ── */}
-        <div ref={pinRef} className="relative">
+        <div ref={pinRef} className="relative max-h-[800px]">
 
           <div
             ref={cardRef}
@@ -205,7 +211,7 @@ export default function HeroSection() {
             />
 
             {/* Left side graphic */}
-            <div className="absolute left-0 top-0 bottom-0 pointer-events-none w-80 overflow-hidden">
+            < div className="absolute left-0 top-0 bottom-0 pointer-events-none w-80 overflow-hidden">
               <img
                 src="/images/bg-side.svg"
                 alt=""

@@ -1,5 +1,4 @@
 import './App.css'
-import { motion } from "framer-motion";
 import ConferenceBanner from './components/ConferenceBanner';
 import OurTargets from './components/OurTargets';
 import ProductSuite from './components/ProductSuite';
@@ -17,7 +16,7 @@ export default function App() {
           <HeroSection />
         </div>
 
-        <div className="absolute bottom-40 left-1/2 -translate-x-1/2 z-0">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-0">
           <img src={arrowDown} alt="" />
         </div>
 
