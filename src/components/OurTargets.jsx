@@ -3,9 +3,9 @@ import { useState, useRef } from "react";
 import ContactModal from "./ContactModal";
 
 const LEFT_TARGETS = [
-  { id: "fintech", label: "Fintech & tokenization projects", x: 6, y: 22 },
-  { id: "wallet", label: "Gold wallet platforms", x: 4, y: 50 },
-  { id: "fi", label: "Financial institutions", x: 6, y: 78 },
+  { id: "fintech", label: "Fintech & tokenization projects", x: -16, y: 22 },
+  { id: "wallet", label: "Gold wallet platforms", x: -20, y: 50 },
+  { id: "fi", label: "Financial institutions", x: -16, y: 78 },
 ];
 
 const RIGHT_TARGETS = [
@@ -17,17 +17,17 @@ const RIGHT_TARGETS = [
 export default function OurTargets() {
   const [modalOpen, setModalOpen] = useState(false);
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-60px" });
 
   const pillFade = (delay, fromX) => ({
     initial: { opacity: 0, x: fromX },
     animate: inView ? { opacity: 1, x: 0 } : {},
-    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1], delay },
+    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1], delay },
   });
 
   const Pill = ({ label, side, x, y, delay }) => (
     <motion.div
-      className={`absolute z-10 w-[230px] rounded-full border border-[#d8dee8] bg-white text-[12px] font-medium text-center leading-snug text-[#3d4f63] shadow-[0_1px_3px_rgba(15,30,50,0.06)] sm:max-w-none sm:px-5 sm:py-2.5 sm:text-[13px] ${
+      className={`absolute z-10 w-[360px] rounded-full border border-[#d8dee8] bg-white text-sm font-medium text-center leading-snug text-[#3d4f63] shadow-[0_1px_3px_rgba(15,30,50,0.06)] sm:max-w-none sm:px-5 sm:py-2.5 sm:text-lg ${
         side === "left"
           ? "right-[54%] sm:right-[56%]"
           : "left-[54%] sm:left-[56%]"
@@ -58,10 +58,10 @@ export default function OurTargets() {
 
 
       <motion.h2
-        className="relative z-10 mb-8 text-center text-2xl font-bold text-[#0d1f33] sm:mb-10 sm:text-[28px]"
+        className="relative z-10 mb-8 text-center text-2xl font-bold text-[#1D3D70] sm:mb-10 sm:text-5xl"
         initial={{ opacity: 0, y: 16 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
       >
         Who is this for?
       </motion.h2>
@@ -69,7 +69,7 @@ export default function OurTargets() {
       <div className="relative z-10 mx-auto w-full max-w-3xl">
         {/* Hub - desktop & tablet */}
         <div className="relative mx-auto hidden min-h-[400px] sm:block">
-          <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 w-full max-w-sm -translate-x-1/2 -translate-y-1/2">
+          <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 w-full max-w-lg -translate-x-1/2 -translate-y-1/2">
             <motion.img
               src="/images/ourtargets.png"
               alt=""
@@ -135,12 +135,12 @@ export default function OurTargets() {
         className="relative z-10 mt-10 flex justify-center sm:mt-12"
         initial={{ opacity: 0, y: 14 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.6, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
       <motion.button
         onClick={() => setModalOpen(true)}
         className="rounded-full px-12 py-3 text-sm font-semibold text-white shadow-md"
-        style={{ background: "linear-gradient(90deg, #9FFFFA 0%, #34AFE4 42%, #1D3D70 100%)" }}
+        style={{ background: "linear-gradient(90deg, #9FFFFA 0%, #34AFE4 34%, #1D3D70 100%)" }}
         whileHover={{ scale: 1.04, boxShadow: "0 8px 24px rgba(30, 26, 77, 0.2)" }}
         whileTap={{ scale: 0.98 }}
       >

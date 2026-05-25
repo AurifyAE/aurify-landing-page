@@ -32,14 +32,14 @@ const PRODUCTS = [
 
 export default function ProductSuite() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "-40px" });
 
   return (
     <section
       ref={ref}
       className="w-full bg-white px-4 py-14 font-sans sm:px-6 sm:py-16"
     >
-      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6 px-4">
         {PRODUCTS.map((product, i) => (
           <motion.article
             key={product.id}
@@ -48,21 +48,21 @@ export default function ProductSuite() {
             initial={{ opacity: 0, y: 36 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{
-              duration: 0.55,
+              duration: 0.7,
               ease: [0.22, 1, 0.36, 1],
-              delay: 0.08 + i * 0.12,
+              delay: 0.1 + i * 0.14,
             }}
             whileHover={{
               y: -6,
               scale: 1.02,
-              transition: { duration: 0.25, ease: "easeOut" },
+              transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
             }}
           >
             <motion.span
               className="text-sm font-medium tracking-wide text-white/90"
               initial={{ opacity: 0 }}
               animate={inView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.4, delay: 0.15 + i * 0.12 }}
+              transition={{ duration: 0.5, delay: 0.2 + i * 0.14 }}
             >
               {product.number}
             </motion.span>
@@ -72,9 +72,9 @@ export default function ProductSuite() {
               initial={{ opacity: 0, y: 12 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{
-                duration: 0.5,
+                duration: 0.6,
                 ease: [0.22, 1, 0.36, 1],
-                delay: 0.2 + i * 0.12,
+                delay: 0.25 + i * 0.14,
               }}
             >
               {product.title}
@@ -85,9 +85,9 @@ export default function ProductSuite() {
               initial={{ opacity: 0, y: 10 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{
-                duration: 0.5,
+                duration: 0.6,
                 ease: [0.22, 1, 0.36, 1],
-                delay: 0.28 + i * 0.12,
+                delay: 0.33 + i * 0.14,
               }}
             >
               {product.description}

@@ -5,19 +5,19 @@ import OurTargets from './components/OurTargets';
 import ProductSuite from './components/ProductSuite';
 import Footer from './components/Footer';
 import HeroSection from './components/HeroSection';
-import arrowDown from "../public//images/arrow-down.svg"
+import arrowDown from "/images/arrow-down.svg"
 
 
 export default function App() {
   return (
     <main>
       <div className="relative">
-  
+
         <div className="relative z-10">
           <HeroSection />
         </div>
 
-        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 z-0">
+        <div className="absolute bottom-40 left-1/2 -translate-x-1/2 z-0">
           <img src={arrowDown} alt="" />
         </div>
 

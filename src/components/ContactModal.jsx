@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-
+const SHEET_URL = "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec";
 const PRODUCTS = [
   "Aurify Bullion Pro",
   "Aurify Refinex",
@@ -17,6 +17,7 @@ export default function ContactModal({ isOpen, onClose }) {
   const [form, setForm] = useState({
     name: "", company: "", role: "", email: "", product: "", headache: "",
   });
+  const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const overlayRef = useRef(null);
 
@@ -34,9 +35,26 @@ export default function ContactModal({ isOpen, onClose }) {
   const handleChange = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
-  const handleSubmit = (e) => {
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+
+    try {
+      await fetch(SHEET_URL, {
+        method: "POST",
+        mode: "no-cors", // required for Apps Script
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      setSubmitted(true);
+    } catch (err) {
+      console.error("Submission error:", err);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleOverlayClick = (e) => {
@@ -149,7 +167,7 @@ export default function ContactModal({ isOpen, onClose }) {
                       </select>
                       <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                          <path d="M4 6l4 4 4-4" stroke="#6b7280" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M4 6l4 4 4-4" stroke="#6b7280" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       </div>
                     </div>
@@ -163,7 +181,7 @@ export default function ContactModal({ isOpen, onClose }) {
                     <textarea
                       name="headache" value={form.headache} onChange={handleChange}
                       placeholder="Describe it freely — the more specific, the better we can help..."
-                      rows={4} required
+                      rows={4}
                       className={`${inputBase} resize-none leading-relaxed`}
                     />
                   </div>
@@ -173,11 +191,12 @@ export default function ContactModal({ isOpen, onClose }) {
                     type="submit"
                     whileHover={{ opacity: 0.92 }}
                     whileTap={{ scale: 0.985 }}
-                    className="w-full flex items-center justify-center gap-2.5 bg-[#1a2556] text-white border-none rounded-lg py-3.5 text-[13px] sm:text-[14px] font-semibold cursor-pointer tracking-[0.01em] font-[inherit]"
+                    style={{ background: "linear-gradient(90deg, #9FFFFA 0%, #34AFE4 34%, #1D3D70 100%)" }}
+                    className="w-full flex items-center justify-center gap-2.5 text-white border-none rounded-lg py-3.5 text-[13px] sm:text-[14px] font-semibold cursor-pointer tracking-[0.01em] font-[inherit]"
                   >
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="22" y1="2" x2="11" y2="13"/>
-                      <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                      <line x1="22" y1="2" x2="11" y2="13" />
+                      <polygon points="22 2 15 22 11 13 2 9 22 2" />
                     </svg>
                     Submit
                   </motion.button>
@@ -194,7 +213,7 @@ export default function ContactModal({ isOpen, onClose }) {
                 <div className="w-14 h-14 sm:w-[60px] sm:h-[60px] rounded-full flex items-center justify-center mb-5"
                   style={{ background: "linear-gradient(135deg, #34afe4, #51c1b6)" }}>
                   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12"/>
+                    <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </div>
                 <h3 className="text-[18px] sm:text-[20px] font-bold text-[#0d1f33] mb-2">Request received!</h3>

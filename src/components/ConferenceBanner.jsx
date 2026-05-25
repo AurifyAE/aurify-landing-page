@@ -8,14 +8,14 @@ export default function ConferenceBanner() {
   const fadeUp = (delay = 0) => ({
     initial: { opacity: 0, y: 18 },
     animate: inView ? { opacity: 1, y: 0 } : {},
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1], delay },
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1], delay },
   });
 
   return (
     <section className="w-full flex justify-center px-4 py-10 font-sans" ref={ref}>
 
       {/* ── DESKTOP (sm+) — unchanged ── */}
-      <div className="relative w-full max-w-5xl min-h-[400px] overflow-hidden rounded-[160px] bg-[#ddeef8] hidden sm:block">
+      <div className="relative w-full max-w-7xl min-h-[400px] overflow-hidden rounded-[160px] bg-[#ddeef8] hidden sm:block">
         {/* Right skyline */}
         <div
           className="absolute inset-y-0 right-0 w-[60%] overflow-hidden"
@@ -33,7 +33,7 @@ export default function ConferenceBanner() {
           style={{ borderTopRightRadius: 160, borderBottomRightRadius: 160 }}
           initial={{ opacity: 0, x: -20 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
           <motion.div className="mb-4 flex items-center gap-2" {...fadeUp(0.1)}>
             <span className="relative flex h-2.5 w-2.5">
@@ -93,7 +93,7 @@ export default function ConferenceBanner() {
           style={{ left: "48%", transform: "translateX(-22%)" }}
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
         />
       </div>
 
@@ -117,7 +117,7 @@ export default function ConferenceBanner() {
             className="absolute bottom-0 right-6 h-[90%] w-auto object-contain object-bottom pointer-events-none z-10"
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
           />
           {/* Name tag on image */}
           <motion.div
