@@ -50,7 +50,7 @@ export default function HeroSection() {
   return (
     <section className="relative max-w-6xl mx-auto w-full min-h-screen overflow-hidden font-sans">
       {/* Top white bar with logo & tagline */}
-      <div className="relative z-10 flex items-center justify-between p-10">
+      <div className="relative z-10 flex flex-col sm:flex-row items-start md:items-center justify-between gap-4 p-10">
         <motion.div
           initial={{ opacity: 0, x: -16 }}
           animate={{ opacity: 1, x: 0 }}
@@ -72,7 +72,7 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg text-gray-400 italic tracking-wide hidden sm:block"
+          className="text-sm md:text-lg text-gray-400 italic tracking-wide"
         >
           intelligently transforming the precious metals
         </motion.p>
@@ -182,7 +182,7 @@ export default function HeroSection() {
                  <div
                    className="relative w-auto md:w-[540px] px-8 py-4 bg-white/95 backdrop-blur-sm"
                  >
-                   <p className="text-[#1a2a4a] text-base sm:text-lg font-medium leading-relaxed">
+                   <p className="text-[#1a2a4a] text-sm sm:text-lg font-medium leading-relaxed">
                      {bubble.text}
                    </p>
                
@@ -191,7 +191,7 @@ export default function HeroSection() {
                  </div>
                </div>
                 ) : (
-                  <div className="relative ml-24">
+                  <div className="relative">
 
                  {/* Multi-layer shadow */}
                  <div
@@ -225,7 +225,7 @@ export default function HeroSection() {
                  <div
                    className="relative w-auto md:w-[540px] px-8 py-4 bg-white/95 backdrop-blur-sm"
                  >
-                   <p className="text-[#1a2a4a] text-base sm:text-lg font-medium leading-relaxed">
+                   <p className="text-[#1a2a4a] text-sm sm:text-lg font-medium leading-relaxed">
                      {bubble.text}
                    </p>
                

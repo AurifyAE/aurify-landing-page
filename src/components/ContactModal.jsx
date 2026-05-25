@@ -10,6 +10,9 @@ const PRODUCTS = [
   "The meeting at APMC Singapore",
 ];
 
+const inputBase =
+  "w-full border border-[#d1d5db] rounded-[6px] bg-white px-3 py-2.5 text-[13px] text-[#111827] outline-none placeholder-[#9ca3af] transition-colors duration-150 focus:border-[#6b7280] font-[inherit] box-border";
+
 export default function ContactModal({ isOpen, onClose }) {
   const [form, setForm] = useState({
     name: "", company: "", role: "", email: "", product: "", headache: "",
@@ -40,35 +43,14 @@ export default function ContactModal({ isOpen, onClose }) {
     if (e.target === overlayRef.current) onClose();
   };
 
-  // Exact input style from image - light gray border, white bg, square-ish radius
-  const inputStyle = {
-    width: "100%",
-    border: "1px solid #d1d5db",
-    borderRadius: "6px",
-    background: "#fff",
-    padding: "10px 12px",
-    fontSize: "13px",
-    color: "#111827",
-    outline: "none",
-    boxSizing: "border-box",
-    fontFamily: "inherit",
-    transition: "border-color 0.15s",
-  };
-
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
           ref={overlayRef}
           onClick={handleOverlayClick}
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
           style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 9999,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "16px",
             background: "rgba(15, 20, 35, 0.55)",
             backdropFilter: "blur(6px)",
             WebkitBackdropFilter: "blur(6px)",
@@ -79,36 +61,18 @@ export default function ContactModal({ isOpen, onClose }) {
           transition={{ duration: 0.2 }}
         >
           <motion.div
-            style={{
-              position: "relative",
-              width: "100%",
-              maxWidth: "460px",
-              background: "#fff",
-              borderRadius: "16px",
-              padding: "40px 36px 36px",
-              boxShadow: "0 24px 60px rgba(0,0,0,0.22)",
-              fontFamily: "inherit",
-            }}
+            className="relative w-full max-w-[460px] sm:max-w-[720px] bg-white rounded-2xl shadow-[0_24px_60px_rgba(0,0,0,0.22)] font-[inherit]
+                       px-5 py-7 sm:px-9 sm:py-10
+                       overflow-hidden"
             initial={{ opacity: 0, y: 28, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.96 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
-            {/* Close X */}
+            {/* Close */}
             <button
               onClick={onClose}
-              style={{
-                position: "absolute",
-                top: "16px",
-                right: "18px",
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                color: "#9ca3af",
-                padding: "4px",
-                lineHeight: 1,
-                fontSize: "18px",
-              }}
+              className="absolute top-4 right-4 text-[#9ca3af] hover:text-[#374151] bg-none border-none cursor-pointer text-lg leading-none p-1 transition-colors duration-150"
               aria-label="Close"
             >
               ✕
@@ -116,109 +80,74 @@ export default function ContactModal({ isOpen, onClose }) {
 
             {!submitted ? (
               <>
-                {/* Title */}
-                <h2 style={{ fontSize: "22px", fontWeight: 700, color: "#0d1f33", margin: "0 0 8px", lineHeight: 1.3 }}>
+                {/* Header */}
+                <h2 className="text-[20px] sm:text-[22px] font-bold text-[#0d1f33] mb-2 leading-snug">
                   Let's talk about your business
                 </h2>
-                <p style={{ fontSize: "13px", color: "#6b7280", margin: "0 0 24px", lineHeight: 1.6 }}>
-                  Tell us who you are and what you're dealing with. We'll come back with something actually relevant - not a generic pitch deck.
+                <p className="text-[12px] sm:text-[13px] text-[#6b7280] mb-6 leading-relaxed">
+                  Tell us who you are and what you're dealing with. We'll come back with something actually relevant — not a generic pitch deck.
                 </p>
 
-                <form onSubmit={handleSubmit}>
-                  {/* Row 1 */}
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "16px" }}>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-0">
+
+                  {/* Row 1: Name + Company */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
                     <div>
-                      <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#111827", marginBottom: "6px" }}>Name</label>
+                      <label className="block text-[11px] sm:text-[12px] font-semibold text-[#111827] mb-1.5">Name</label>
                       <input
-                        name="name"
-                        value={form.name}
-                        onChange={handleChange}
-                        placeholder="Your name"
-                        required
-                        style={inputStyle}
-                        onFocus={(e) => (e.target.style.borderColor = "#6b7280")}
-                        onBlur={(e) => (e.target.style.borderColor = "#d1d5db")}
+                        name="name" value={form.name} onChange={handleChange}
+                        placeholder="Your name" required
+                        className={inputBase}
                       />
                     </div>
                     <div>
-                      <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#111827", marginBottom: "6px" }}>Company</label>
+                      <label className="block text-[11px] sm:text-[12px] font-semibold text-[#111827] mb-1.5">Company</label>
                       <input
-                        name="company"
-                        value={form.company}
-                        onChange={handleChange}
-                        placeholder="Company"
-                        required
-                        style={inputStyle}
-                        onFocus={(e) => (e.target.style.borderColor = "#6b7280")}
-                        onBlur={(e) => (e.target.style.borderColor = "#d1d5db")}
+                        name="company" value={form.company} onChange={handleChange}
+                        placeholder="Company" required
+                        className={inputBase}
                       />
                     </div>
                   </div>
 
-                  {/* Row 2 */}
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "16px" }}>
+                  {/* Row 2: Role + Email */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
                     <div>
-                      <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#111827", marginBottom: "6px" }}>Role</label>
+                      <label className="block text-[11px] sm:text-[12px] font-semibold text-[#111827] mb-1.5">Role</label>
                       <input
-                        name="role"
-                        value={form.role}
-                        onChange={handleChange}
-                        placeholder="Your title"
-                        required
-                        style={inputStyle}
-                        onFocus={(e) => (e.target.style.borderColor = "#6b7280")}
-                        onBlur={(e) => (e.target.style.borderColor = "#d1d5db")}
+                        name="role" value={form.role} onChange={handleChange}
+                        placeholder="Your title" required
+                        className={inputBase}
                       />
                     </div>
                     <div>
-                      <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#111827", marginBottom: "6px" }}>Work email</label>
+                      <label className="block text-[11px] sm:text-[12px] font-semibold text-[#111827] mb-1.5">Work email</label>
                       <input
-                        name="email"
-                        type="email"
-                        value={form.email}
-                        onChange={handleChange}
-                        placeholder="email@company.com"
-                        required
-                        style={inputStyle}
-                        onFocus={(e) => (e.target.style.borderColor = "#6b7280")}
-                        onBlur={(e) => (e.target.style.borderColor = "#d1d5db")}
+                        name="email" type="email" value={form.email} onChange={handleChange}
+                        placeholder="email@company.com" required
+                        className={inputBase}
                       />
                     </div>
                   </div>
 
                   {/* Dropdown */}
-                  <div style={{ marginBottom: "16px" }}>
-                    <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#111827", marginBottom: "6px" }}>
+                  <div className="mb-4">
+                    <label className="block text-[11px] sm:text-[12px] font-semibold text-[#111827] mb-1.5">
                       I want to learn more about
                     </label>
-                    <div style={{ position: "relative" }}>
+                    <div className="relative">
                       <select
-                        name="product"
-                        value={form.product}
-                        onChange={handleChange}
+                        name="product" value={form.product} onChange={handleChange}
                         required
-                        style={{
-                          ...inputStyle,
-                          appearance: "none",
-                          WebkitAppearance: "none",
-                          paddingRight: "36px",
-                          cursor: "pointer",
-                          color: form.product ? "#111827" : "#9ca3af",
-                          background: "#fff",
-                        }}
-                        onFocus={(e) => (e.target.style.borderColor = "#6b7280")}
-                        onBlur={(e) => (e.target.style.borderColor = "#d1d5db")}
+                        className={`${inputBase} appearance-none pr-9 cursor-pointer`}
+                        style={{ color: form.product ? "#111827" : "#9ca3af" }}
                       >
                         <option value="" disabled style={{ color: "#9ca3af" }}>Choose a product</option>
                         {PRODUCTS.map((p) => (
                           <option key={p} value={p} style={{ color: "#111827" }}>{p}</option>
                         ))}
                       </select>
-                      {/* Chevron */}
-                      <div style={{
-                        position: "absolute", right: "12px", top: "50%",
-                        transform: "translateY(-50%)", pointerEvents: "none",
-                      }}>
+                      <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                           <path d="M4 6l4 4 4-4" stroke="#6b7280" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
@@ -227,92 +156,55 @@ export default function ContactModal({ isOpen, onClose }) {
                   </div>
 
                   {/* Textarea */}
-                  <div style={{ marginBottom: "24px" }}>
-                    <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#111827", marginBottom: "6px" }}>
+                  <div className="mb-6">
+                    <label className="block text-[11px] sm:text-[12px] font-semibold text-[#111827] mb-1.5">
                       What's your single biggest operational headache right now?
                     </label>
                     <textarea
-                      name="headache"
-                      value={form.headache}
-                      onChange={handleChange}
-                      placeholder="Describe it freely - the more specific, the better we can help..."
-                      rows={4}
-                      required
-                      style={{
-                        ...inputStyle,
-                        resize: "none",
-                        lineHeight: 1.55,
-                      }}
-                      onFocus={(e) => (e.target.style.borderColor = "#6b7280")}
-                      onBlur={(e) => (e.target.style.borderColor = "#d1d5db")}
+                      name="headache" value={form.headache} onChange={handleChange}
+                      placeholder="Describe it freely — the more specific, the better we can help..."
+                      rows={4} required
+                      className={`${inputBase} resize-none leading-relaxed`}
                     />
                   </div>
 
-                  {/* Submit button - full width, dark navy, exact from image */}
+                  {/* Submit */}
                   <motion.button
                     type="submit"
                     whileHover={{ opacity: 0.92 }}
                     whileTap={{ scale: 0.985 }}
-                    style={{
-                      width: "100%",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: "10px",
-                      background: "#1a2556",
-                      color: "#fff",
-                      border: "none",
-                      borderRadius: "8px",
-                      padding: "14px 20px",
-                      fontSize: "14px",
-                      fontWeight: 600,
-                      cursor: "pointer",
-                      fontFamily: "inherit",
-                      letterSpacing: "0.01em",
-                    }}
+                    className="w-full flex items-center justify-center gap-2.5 bg-[#1a2556] text-white border-none rounded-lg py-3.5 text-[13px] sm:text-[14px] font-semibold cursor-pointer tracking-[0.01em] font-[inherit]"
                   >
-                    {/* Paper plane */}
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="22" y1="2" x2="11" y2="13"/>
                       <polygon points="22 2 15 22 11 13 2 9 22 2"/>
                     </svg>
-                    Request a private demo
+                    Submit
                   </motion.button>
                 </form>
               </>
             ) : (
               /* Success */
               <motion.div
-                style={{ textAlign: "center", padding: "24px 0" }}
+                className="flex flex-col items-center text-center py-6"
                 initial={{ opacity: 0, scale: 0.92 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div style={{
-                  width: 60, height: 60, borderRadius: "50%",
-                  background: "linear-gradient(135deg, #34afe4, #51c1b6)",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  margin: "0 auto 20px",
-                }}>
+                <div className="w-14 h-14 sm:w-[60px] sm:h-[60px] rounded-full flex items-center justify-center mb-5"
+                  style={{ background: "linear-gradient(135deg, #34afe4, #51c1b6)" }}>
                   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <polyline points="20 6 9 17 4 12"/>
                   </svg>
                 </div>
-                <h3 style={{ fontSize: "20px", fontWeight: 700, color: "#0d1f33", margin: "0 0 10px" }}>
-                  Request received!
-                </h3>
-                <p style={{ fontSize: "13px", color: "#6b7280", lineHeight: 1.65, maxWidth: 300, margin: "0 auto 28px" }}>
-                  We'll review your details and get back with something actually useful - within 24 hours.
+                <h3 className="text-[18px] sm:text-[20px] font-bold text-[#0d1f33] mb-2">Request received!</h3>
+                <p className="text-[12px] sm:text-[13px] text-[#6b7280] leading-relaxed max-w-[280px] mb-7">
+                  We'll review your details and get back with something actually useful — within 24 hours.
                 </p>
                 <motion.button
                   onClick={onClose}
                   whileHover={{ opacity: 0.88 }}
-                  style={{
-                    background: "#1a2556", color: "#fff", border: "none",
-                    borderRadius: "8px", padding: "11px 32px",
-                    fontSize: "13px", fontWeight: 600, cursor: "pointer",
-                    fontFamily: "inherit",
-                  }}
+                  className="bg-[#1a2556] text-white border-none rounded-lg px-8 py-2.5 text-[13px] font-semibold cursor-pointer font-[inherit]"
                 >
                   Close
                 </motion.button>

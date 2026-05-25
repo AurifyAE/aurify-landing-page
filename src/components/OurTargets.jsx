@@ -140,7 +140,7 @@ export default function OurTargets() {
       <motion.button
         onClick={() => setModalOpen(true)}
         className="rounded-full px-12 py-3 text-sm font-semibold text-white shadow-md"
-        style={{ background: "linear-gradient(90deg, #34afe4 0%, #51c1b6 42%, #1e1a4d 100%)" }}
+        style={{ background: "linear-gradient(90deg, #9FFFFA 0%, #34AFE4 42%, #1D3D70 100%)" }}
         whileHover={{ scale: 1.04, boxShadow: "0 8px 24px rgba(30, 26, 77, 0.2)" }}
         whileTap={{ scale: 0.98 }}
       >
