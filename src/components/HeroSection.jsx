@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import arrowDown from "/images/arrow-down.svg"
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -27,7 +29,6 @@ const chatBubbles = [
   },
 ];
 
-// All 4 bubbles animate in during the pin phase
 const PINNED_BUBBLE_COUNT = 4;
 
 export default function HeroSection() {
@@ -59,24 +60,22 @@ export default function HeroSection() {
       );
 
       // ── Hide all bubbles + CTA initially ────────────────────────
-      gsap.set(bubblesRef.current, { opacity: 0, y: 40, scale: 0.82, willChange: "transform, opacity" });
-      gsap.set(ctaRef.current, { opacity: 0, y: 24, willChange: "transform, opacity" });
+      gsap.set(bubblesRef.current, { opacity: 0, y: 40, scale: 0.82 });
+      gsap.set(ctaRef.current, { opacity: 0, y: 24 });
 
-      // ── PINNED timeline: all 4 bubbles with content slide ──────
-      // Card stays fixed; each scroll-step reveals one bubble.
-      // After bubble 2, content slides up so bubbles 3 & 4 are visible.
-      const SLIDE_UP_STEP = 1; // extra timeline step for the slide-up
+      // ── PINNED timeline ──────────────────────────────────────────
+      const SLIDE_UP_STEP = 1;
       const pinnedTl = gsap.timeline({
         scrollTrigger: {
           trigger: wrapperRef.current,
-          start: "top -20%",
-          // extra room for the slide-up step between bubble 2 and 3
+          start: "top -15%",
           end: () => `+=${(PINNED_BUBBLE_COUNT + SLIDE_UP_STEP + 0.6) * window.innerHeight}`,
           pin: pinRef.current,
           pinSpacing: true,
-          scrub: 1.2,
-          anticipatePin: 1,
+          scrub: 2,
+          anticipatePin: 0,
           invalidateOnRefresh: true,
+          refreshPriority: 1,
         },
       });
 
@@ -92,24 +91,9 @@ export default function HeroSection() {
         }, "+=0.4");
       });
 
-      // ── Slide entire card up so bubbles 3 & 4 come into view ──
-      // pinnedTl.to(cardRef.current, {
-      //   y: () => {
-      //     const contentEl = contentRef.current;
-      //     const cardEl = cardRef.current;
-      //     if (!contentEl || !cardEl) return -300;
-      //     const contentHeight = contentEl.scrollHeight;
-      //     const cardHeight = cardEl.offsetHeight;
-      //     // Slide up by the overflow amount, capped for safety
-      //     const overflow = contentHeight - cardHeight;
-      //     return -Math.min(Math.max(overflow * 0.55, 200), 500);
-      //   },
-      //   duration: 1.2,
-      //   ease: "power2.inOut",
-      // }, "+=0.3");
-
+      // Slide card up
       pinnedTl.to(cardRef.current, {
-        y: -250,
+        y: -100,
         duration: 1.2,
         ease: "power2.inOut",
       }, "+=0.3");
@@ -126,8 +110,7 @@ export default function HeroSection() {
         }, "+=0.4");
       });
 
-      // ── CTA animates after pin releases ───────────────────────
-
+      // ── CTA after pin releases ─────────────────────────────────
       gsap.to(ctaRef.current, {
         opacity: 1,
         y: 0,
@@ -140,8 +123,8 @@ export default function HeroSection() {
         },
       });
 
+      ScrollTrigger.refresh();
     }, wrapperRef);
-
     return () => ctx.revert();
   }, []);
 
@@ -168,7 +151,10 @@ export default function HeroSection() {
   };
 
   return (
-    <div ref={wrapperRef}>
+    // FIX 3: overflow-x-hidden prevents the deep box-shadow from
+    //         expanding the scroll width and causing layout recalculation
+    //         at the pin moment.
+    <div ref={wrapperRef} style={{ overflowX: "hidden" }}>
       <section className="relative max-w-7xl mx-auto w-full font-sans">
 
         {/* Top bar */}
@@ -190,15 +176,20 @@ export default function HeroSection() {
           </p>
         </div>
 
-        {/* ── PINNED GRADIENT CARD ── */}
-        <div ref={pinRef} className="relative max-h-[800px]">
+        {/* FIX 4: pinRef must NOT have max-h or overflow constraints.
+                   GSAP measures its natural height to set up the pin.
+                   Clipping that height causes the jump. Use min-h-screen
+                   so it has a stable, predictable size to pin against. */}
+        <div ref={pinRef} className="relative min-h-screen">
 
           <div
             ref={cardRef}
-            className="relative mx-4 mb-6 rounded-2xl overflow-hidden"
+            className="relative mx-4 rounded-2xl z-20"
             style={{
               background: "linear-gradient(140deg, #51C1B6 0%, #34AFE4 60%, #1E1A4D 100%)",
-              minHeight: "calc(100vh - 100px)",
+              // FIX 5: Use a fixed vh height instead of calc() — dynamic
+              //         calc recalculates on scroll and causes repaints at pin time.
+              height: "calc(160vh - 100px)",
             }}
           >
             {/* Diagonal sweep */}
@@ -211,7 +202,7 @@ export default function HeroSection() {
             />
 
             {/* Left side graphic */}
-            < div className="absolute left-0 top-0 bottom-0 pointer-events-none w-80 overflow-hidden">
+            <div className="absolute left-0 top-0 bottom-0 pointer-events-none w-80 overflow-hidden">
               <img
                 src="/images/bg-side.svg"
                 alt=""
@@ -230,8 +221,10 @@ export default function HeroSection() {
               />
             </div>
 
-            {/* Content */}
-            <div ref={contentRef} className="relative z-10 flex flex-col items-center px-8 pt-12 pb-20" style={{ willChange: "transform" }}>
+            {/* FIX 6: Remove willChange from contentRef — it creates a new
+                       stacking context that conflicts with GSAP's pin transform
+                       on the parent, causing a compositing glitch at pin entry. */}
+            <div ref={contentRef} className="relative z-10 flex flex-col items-center px-8 pt-12 pb-20">
 
               {/* Headline */}
               <div ref={headlineRef} className="text-center mb-12 px-4" style={{ opacity: 0 }}>
@@ -277,6 +270,11 @@ export default function HeroSection() {
               </div>
 
             </div>
+          </div>
+
+          {/* Arrow sits at the bottom of the pinned viewport, not the card */}
+          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10 scroll-arrow">
+            <img src={arrowDown} alt="Scroll down" />
           </div>
         </div>
       </section>
