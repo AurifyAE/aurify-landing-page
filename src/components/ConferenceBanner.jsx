@@ -53,6 +53,9 @@ export default function ConferenceBanner() {
           <motion.p style={{ fontSize: "15px", fontWeight: 700, color: "#0d1f33", lineHeight: 1.45, marginBottom: "10px" }} {...fadeUp(0.18)}>
             Meet our CEO in person at the Asia Pacific Metals Conference.
           </motion.p>
+          <motion.p style={{ fontSize: "14px", fontWeight: 600, color: "#0d1f33", lineHeight: 1.45, marginBottom: "10px" }} {...fadeUp(0.18)}>
+            14-16 June 2026, Shangri-La Hotel | Singapore
+          </motion.p>
 
           <motion.div style={{ marginBottom: "8px" }} {...fadeUp(0.26)}>
             {["Founder & CEO, Aurify Technology", "12+ years · Precious metals · Digital transformation"].map((line, i) => (
