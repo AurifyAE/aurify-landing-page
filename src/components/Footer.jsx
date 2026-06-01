@@ -25,9 +25,9 @@ export default function Footer() {
           {/* Inline fallback */}
           <div style={{ display: "none" }} className="items-center gap-1.5">
             <svg width="28" height="28" viewBox="0 0 34 34" fill="none">
-              <polygon points="17,2 30,9 30,25 17,32 4,25 4,9" fill="none" stroke="#00B4D8" strokeWidth="2"/>
-              <polygon points="17,8 24,12 24,22 17,26 10,22 10,12" fill="#0077B6" opacity="0.5"/>
-              <polygon points="17,13 21,16 21,21 17,24 13,21 13,16" fill="#023E8A"/>
+              <polygon points="17,2 30,9 30,25 17,32 4,25 4,9" fill="none" stroke="#00B4D8" strokeWidth="2" />
+              <polygon points="17,8 24,12 24,22 17,26 10,22 10,12" fill="#0077B6" opacity="0.5" />
+              <polygon points="17,13 21,16 21,21 17,24 13,21 13,16" fill="#023E8A" />
             </svg>
             <div>
               <div className="text-[#023E8A] font-bold text-base leading-none tracking-wide">Aurify</div>
@@ -56,8 +56,8 @@ export default function Footer() {
             <a href="tel:+97158 502 3411" className="hover:text-[#0077B6] transition-colors duration-200 mr-3">
               +971 58 502 3411
             </a>
-            <a href="mailto:info@aurify.global" className="hover:text-[#0077B6] transition-colors duration-200">
-              info@aurify.global
+            <a href="mailto:info@aurify.ae" className="hover:text-[#0077B6] transition-colors duration-200">
+              info@aurify.ae
             </a>
           </p>
         </div>
