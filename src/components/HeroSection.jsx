@@ -59,8 +59,9 @@ export default function HeroSection() {
         { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", delay: 0.15 }
       );
 
-      // ── Hide all bubbles + CTA initially ────────────────────────
-      gsap.set(bubblesRef.current, { opacity: 0, y: 40, scale: 0.82 });
+      // ── Hide bubbles 2–4 + CTA initially; first bubble visible on load ──
+      gsap.set(bubblesRef.current.slice(1), { opacity: 0, y: 40, scale: 0.82 });
+      gsap.set(bubblesRef.current[0], { opacity: 1, y: 0, scale: 1 });
       gsap.set(ctaRef.current, { opacity: 0, y: 24 });
 
       // ── PINNED timeline ──────────────────────────────────────────
@@ -79,17 +80,16 @@ export default function HeroSection() {
         },
       });
 
-      // Bubbles 1 & 2
-      bubblesRef.current.slice(0, 2).forEach((el) => {
-        if (!el) return;
-        pinnedTl.to(el, {
+      // Bubble 2 (first is already visible on load)
+      if (bubblesRef.current[1]) {
+        pinnedTl.to(bubblesRef.current[1], {
           opacity: 1,
           y: 0,
           scale: 1,
           duration: 1,
           ease: "power2.out",
         }, "+=0.4");
-      });
+      }
 
       // Slide card up
       pinnedTl.to(cardRef.current, {
@@ -184,12 +184,9 @@ export default function HeroSection() {
 
           <div
             ref={cardRef}
-            className="relative mx-4 rounded-2xl z-20"
+            className="relative mx-4 rounded-2xl z-20 h-[140vh] 2xl:h-[130vh]"
             style={{
               background: "linear-gradient(140deg, #51C1B6 0%, #34AFE4 60%, #1E1A4D 100%)",
-              // FIX 5: Use a fixed vh height instead of calc() — dynamic
-              //         calc recalculates on scroll and causes repaints at pin time.
-              height: "calc(160vh - 100px)",
             }}
           >
             {/* Diagonal sweep */}
@@ -245,6 +242,7 @@ export default function HeroSection() {
                       ? "justify-end pl-10"
                       : "justify-start pr-10"
                       }`}
+                    style={i > 0 ? { opacity: 0 } : undefined}
                   >
                     <div className={`relative ${bubble.side === "left" ? "ml-6" : ""}`}>
                       <div className="absolute inset-0" style={shadowStyle} />

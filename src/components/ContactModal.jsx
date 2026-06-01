@@ -231,7 +231,7 @@ export default function ContactModal({ isOpen, onClose }) {
                 </div>
                 <h3 className="text-[18px] sm:text-[20px] font-bold text-[#0d1f33] mb-2">Request received!</h3>
                 <p className="text-[12px] sm:text-[13px] text-[#6b7280] leading-relaxed max-w-[280px] mb-7">
-                  We'll review your details and get back with something actually useful — within 24 hours.
+                Our team is on it. We'll review and get back to you soon.
                 </p>
                 <motion.button
                   onClick={onClose}
