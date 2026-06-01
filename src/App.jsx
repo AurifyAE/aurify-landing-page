@@ -1,4 +1,5 @@
 import './App.css'
+import { ReactLenis } from 'lenis/react';
 import ConferenceBanner from './components/ConferenceBanner';
 import OurTargets from './components/OurTargets';
 import ProductSuite from './components/ProductSuite';
@@ -9,7 +10,8 @@ import FloatingKnowMore from './components/FloatingKnowMore';
 
 export default function App() {
   return (
-    <main className="overflow-hidden">
+    <ReactLenis root>
+      <main className="overflow-hidden">
 
       <HeroSection />
       <ProductSuite />
@@ -27,6 +29,7 @@ export default function App() {
         <Footer />
       </div>
       <FloatingKnowMore />
-    </main>
+      </main>
+    </ReactLenis>
   );
 }
