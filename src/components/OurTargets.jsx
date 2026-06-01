@@ -14,6 +14,8 @@ const RIGHT_TARGETS = [
   { id: "bullion", label: "Bullion traders & wholesalers", x: 70, y: 78 },
 ];
 
+const ALL_TARGETS = [...LEFT_TARGETS, ...RIGHT_TARGETS];
+
 export default function OurTargets() {
   const [modalOpen, setModalOpen] = useState(false);
   const ref = useRef(null);
@@ -68,7 +70,7 @@ export default function OurTargets() {
 
       <div className="relative z-10 mx-auto w-full max-w-3xl">
         {/* Hub - desktop & tablet */}
-        <div className="relative mx-auto hidden min-h-[400px] sm:block">
+        <div className="relative mx-auto hidden min-h-[400px] lg:block">
           <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 w-full max-w-lg -translate-x-1/2 -translate-y-1/2">
             <motion.img
               src="/images/ourtargets.png"
@@ -94,40 +96,34 @@ export default function OurTargets() {
           ))}
         </div>
 
-        {/* Mobile */}
-        <div className="flex flex-col items-center gap-7 sm:hidden">
+        {/* Mobile — image + stacked pills */}
+        <div className="mx-auto flex w-full max-w-sm flex-col items-center gap-6 lg:hidden">
           <motion.img
             src="/images/ourtargets.png"
             alt=""
-            className="w-full max-w-sm object-contain"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={
-              inView ? { opacity: 1, scale: 1, y: [0, -6, 0] } : {}
-            }
-            transition={{
-              opacity: { duration: 0.5 },
-              scale: { duration: 0.5 },
-              y: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 },
-            }}
+            className="w-full max-w-[280px] object-contain"
+            initial={{ opacity: 0, y: 12 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           />
 
-          <div className="flex w-full max-w-xs flex-col gap-2.5">
-            {[...LEFT_TARGETS, ...RIGHT_TARGETS].map((item, i) => (
-              <motion.div
+          <ul className="flex w-full flex-col gap-2.5">
+            {ALL_TARGETS.map((item, i) => (
+              <motion.li
                 key={item.id}
-                className="rounded-full border border-[#d8dee8] bg-white px-4 py-2.5 text-center text-[12px] font-medium text-[#3d4f63] shadow-[0_1px_3px_rgba(15,30,50,0.06)]"
-                initial={{ opacity: 0, y: 10 }}
+                className="list-none rounded-full border border-[#d8dee8] bg-white px-4 py-3 text-center text-sm font-medium text-[#3d4f63] shadow-[0_1px_3px_rgba(15,30,50,0.06)]"
+                initial={{ opacity: 0, y: 8 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{
-                  duration: 0.45,
-                  delay: 0.18 + i * 0.06,
+                  duration: 0.4,
+                  delay: 0.1 + i * 0.05,
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
                 {item.label}
-              </motion.div>
+              </motion.li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
 
@@ -137,16 +133,20 @@ export default function OurTargets() {
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
-      <motion.button
-        onClick={() => setModalOpen(true)}
-        className="rounded-full px-12 py-3 text-sm font-semibold text-white shadow-md"
-        style={{ background: "linear-gradient(90deg, #9FFFFA 0%, #34AFE4 34%, #1D3D70 100%)" }}
-        whileHover={{ scale: 1.04, boxShadow: "0 8px 24px rgba(30, 26, 77, 0.2)" }}
-        whileTap={{ scale: 0.98 }}
-      >
-        Know More
-      </motion.button>
+        <motion.button
+          type="button"
+          onClick={() => setModalOpen(true)}
+          className="rounded-full px-16 py-4 text-base font-semibold text-white shadow-md"
+          style={{
+            background: "linear-gradient(90deg, #9FFFFA 0%, #34AFE4 34%, #1D3D70 100%)",
+          }}
+          whileHover={{ scale: 1.04, boxShadow: "0 8px 24px rgba(30, 26, 77, 0.2)" }}
+          whileTap={{ scale: 0.98 }}
+        >
+          Know More
+        </motion.button>
       </motion.div>
+
       <ContactModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   );

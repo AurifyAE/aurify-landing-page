@@ -4,11 +4,12 @@ import OurTargets from './components/OurTargets';
 import ProductSuite from './components/ProductSuite';
 import Footer from './components/Footer';
 import HeroSection from './components/HeroSection';
+import FloatingKnowMore from './components/FloatingKnowMore';
 
 
 export default function App() {
   return (
-    <main>
+    <main className="overflow-hidden">
 
       <HeroSection />
       <ProductSuite />
@@ -25,6 +26,7 @@ export default function App() {
         <ConferenceBanner />
         <Footer />
       </div>
+      <FloatingKnowMore />
     </main>
   );
 }
