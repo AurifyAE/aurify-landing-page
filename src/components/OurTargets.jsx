@@ -2,6 +2,10 @@ import { motion, useInView } from "framer-motion";
 import { useState, useRef } from "react";
 import ContactModal from "./ContactModal";
 
+const GRADIENT = "linear-gradient(90deg, #9FFFFA 0%, #34AFE4 40%, #1D3D70 100%)";
+const GLOW = "0 0 0 0 rgba(52,175,228,0), 0 8px 32px rgba(30,61,112,0.28), 0 2px 8px rgba(52,175,228,0.18)";
+const GLOW_HOV = "0 0 0 6px rgba(52,175,228,0.12), 0 12px 40px rgba(30,61,112,0.36), 0 4px 16px rgba(52,175,228,0.28)";
+
 const LEFT_TARGETS = [
   { id: "fintech", label: "Fintech & tokenization projects", x: -16, y: 22 },
   { id: "wallet", label: "Gold wallet platforms", x: -20, y: 50 },
@@ -136,14 +140,41 @@ export default function OurTargets() {
         <motion.button
           type="button"
           onClick={() => setModalOpen(true)}
-          className="rounded-full px-16 py-4 text-base font-semibold text-white shadow-md"
+          className="relative overflow-hidden rounded-full px-16 py-4 text-base font-semibold text-white tracking-wide select-none"
           style={{
-            background: "linear-gradient(90deg, #9FFFFA 0%, #34AFE4 34%, #1D3D70 100%)",
+            background: GRADIENT,
+            boxShadow: GLOW,
+            letterSpacing: "0.04em",
           }}
-          whileHover={{ scale: 1.04, boxShadow: "0 8px 24px rgba(30, 26, 77, 0.2)" }}
-          whileTap={{ scale: 0.98 }}
+          whileHover={{
+            scale: 1.06,
+            boxShadow: GLOW_HOV,
+            transition: { type: "spring", stiffness: 400, damping: 22 },
+          }}
+          whileTap={{
+            scale: 0.96,
+            transition: { type: "spring", stiffness: 600, damping: 30 },
+          }}
         >
-          Know More
+          {/* Shimmer sweep */}
+          <motion.span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 rounded-full"
+            style={{
+              background:
+                "linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.28) 50%, transparent 65%)",
+              backgroundSize: "200% 100%",
+            }}
+            animate={{ backgroundPosition: ["200% 0", "-200% 0"] }}
+            transition={{
+              duration: 2.8,
+              repeat: Infinity,
+              ease: "linear",
+              repeatDelay: 1.4,
+            }}
+          />
+
+          <span className="relative z-10">Know More</span>
         </motion.button>
       </motion.div>
 

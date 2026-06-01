@@ -117,6 +117,15 @@ export default function HeroSection() {
               }}
             />
 
+            <div className="pointer-events-none absolute bottom-0 -left-15 top-0 w-80 overflow-hidden">
+              <img
+                src="/images/bg-side.svg"
+                alt=""
+                className="h-full w-full object-contain"
+                onError={(e) => (e.target.style.display = "none")}
+              />
+            </div>
+
             <div className="pointer-events-none absolute bottom-0 right-0 h-52 w-52">
               <img
                 src="/images/bg-bottom-corner.svg"
@@ -128,9 +137,8 @@ export default function HeroSection() {
 
             <div className="relative z-10 flex flex-col items-center px-8 pb-20 pt-12">
               <div ref={headlineRef} className="mb-12 px-4 text-center" style={{ opacity: 0 }}>
-                <h1 className="text-xl font-bold leading-snug text-white drop-shadow-sm sm:text-2xl md:text-3xl">
+                <h1 className="text-xl font-bold leading-snug text-pretty text-white drop-shadow-sm sm:text-2xl md:text-3xl">
                   The Precious Metals industry is changing.
-                  <br />
                   Is your operation ready?
                 </h1>
               </div>
@@ -139,9 +147,8 @@ export default function HeroSection() {
                 {chatBubbles.map((bubble) => (
                   <div
                     key={bubble.id}
-                    className={`flex ${
-                      bubble.side === "right" ? "justify-end pl-10" : "justify-start pr-10"
-                    }`}
+                    className={`flex ${bubble.side === "right" ? "justify-end pl-10" : "justify-start pr-10"
+                      }`}
                   >
                     <div className={`relative ${bubble.side === "left" ? "ml-6" : ""}`}>
                       <div className="absolute inset-0" style={shadowStyle} />
@@ -171,14 +178,15 @@ export default function HeroSection() {
             <img src={arrowDown} alt="Scroll down" />
           </div>
         </div>
-        <div className="pointer-events-none absolute bottom-0 -left-10 top-0 w-80 overflow-hidden z-50">
-              <img
-                src="/images/bg-side.svg"
-                alt=""
-                className="h-full w-full object-contain"
-                onError={(e) => (e.target.style.display = "none")}
-              />
-            </div>
+
+        {/* <div className="pointer-events-none absolute bottom-0 -left-10 top-0 w-80 overflow-hidden z-40 hidden xl:block">
+          <img
+            src="/images/bg-side.svg"
+            alt=""
+            className="h-full w-full object-contain"
+            onError={(e) => (e.target.style.display = "none")}
+          />
+        </div> */}
       </section>
     </div>
   );
