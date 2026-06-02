@@ -138,7 +138,8 @@ export default function HeroSection() {
             <div className="relative z-10 flex flex-col items-center px-8 pb-20 pt-12">
               <div ref={headlineRef} className="mb-12 px-4 text-center" style={{ opacity: 0 }}>
                 <h1 className="text-xl font-bold leading-snug text-pretty text-white drop-shadow-sm sm:text-2xl md:text-3xl">
-                  The Precious Metals industry is changing.
+                  The Precious Metals industry is changing. 
+                  <br />
                   Is your operation ready?
                 </h1>
               </div>
