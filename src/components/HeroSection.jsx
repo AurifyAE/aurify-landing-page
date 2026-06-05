@@ -59,25 +59,38 @@ export default function HeroSection() {
     return () => ctx.revert();
   }, []);
 
-  const shadowStyle = {
-    filter: "saturate(120%) blur(0.2px)",
+  const bubbleShadow = {
     boxShadow: `
-      rgba(30, 26, 77, 0.42) -6px 6px 4px,
-      rgba(30, 26, 77, 0.38) -12px 12px 8px,
-      rgba(30, 26, 77, 0.32) -18px 18px 12px,
-      rgba(30, 26, 77, 0.28) -24px 24px 16px,
-      rgba(30, 26, 77, 0.24) -30px 30px 20px,
-      rgba(30, 26, 77, 0.20) -36px 36px 24px,
-      rgba(52, 175, 228, 0.26) -42px 42px 28px,
-      rgba(52, 175, 228, 0.22) -48px 48px 32px,
-      rgba(52, 175, 228, 0.18) -54px 54px 36px,
-      rgba(52, 175, 228, 0.26) -60px 60px 40px,
-      rgba(52, 175, 228, 0.22) -66px 48px 44px,
-      rgba(52, 175, 228, 0.18) -72px 72px 48px,
-      rgba(81, 193, 182, 0.18) -78px 78px 52px,
-      rgba(81, 193, 182, 0.14) -84px 84px 56px,
-      rgba(81, 193, 182, 0.10) -90px 90px 60px,
-      rgba(81, 193, 182, 0.06) -96px 96px 72px
+      -4px 4px 2px rgba(29, 100, 160, 0.55),
+      -8px 8px 3px rgba(29, 100, 160, 0.52),
+      -12px 12px 4px rgba(29, 100, 160, 0.48),
+      -16px 16px 5px rgba(29, 100, 160, 0.45),
+      -20px 20px 6px rgba(29, 100, 160, 0.42),
+      -24px 24px 7px rgba(29, 100, 160, 0.38),
+      -28px 28px 8px rgba(29, 100, 160, 0.35),
+      -32px 32px 9px rgba(29, 100, 160, 0.32),
+      -36px 36px 10px rgba(29, 100, 160, 0.29),
+      -40px 40px 11px rgba(29, 100, 160, 0.26),
+      -44px 44px 12px rgba(29, 100, 160, 0.23),
+      -48px 48px 13px rgba(29, 100, 160, 0.20),
+      -52px 52px 14px rgba(29, 100, 160, 0.18),
+      -56px 56px 15px rgba(29, 100, 160, 0.16),
+      -60px 60px 16px rgba(29, 100, 160, 0.14),
+      -64px 64px 18px rgba(29, 100, 160, 0.12),
+      -68px 68px 20px rgba(29, 100, 160, 0.10),
+      -72px 72px 22px rgba(29, 100, 160, 0.08),
+      -76px 76px 24px rgba(29, 100, 160, 0.07),
+      -80px 80px 26px rgba(29, 100, 160, 0.06),
+      -84px 84px 28px rgba(29, 100, 160, 0.05),
+      -88px 88px 30px rgba(29, 100, 160, 0.04),
+      -92px 92px 32px rgba(29, 100, 160, 0.03),
+      -96px 96px 35px rgba(29, 100, 160, 0.025),
+      -100px 100px 38px rgba(29, 100, 160, 0.02),
+      -104px 104px 42px rgba(29, 100, 160, 0.015),
+      -108px 108px 46px rgba(29, 100, 160, 0.01),
+      -112px 112px 50px rgba(29, 100, 160, 0.008),
+      -116px 116px 55px rgba(29, 100, 160, 0.005),
+      -120px 120px 60px rgba(29, 100, 160, 0.003)
     `,
   };
 
@@ -152,8 +165,7 @@ export default function HeroSection() {
                       }`}
                   >
                     <div className={`relative ${bubble.side === "left" ? "ml-6" : ""}`}>
-                      <div className="absolute inset-0" style={shadowStyle} />
-                      <div className="relative w-auto bg-white/95 px-6 py-4 md:px-12 md:py-8 backdrop-blur-sm md:w-[540px]">
+                      <div className="relative w-auto bg-white/95 px-6 py-4 md:px-12 md:py-8 backdrop-blur-sm md:w-[540px]" style={bubbleShadow}>
                         <p className="text-sm font-medium leading-relaxed text-[#1D3D70] sm:text-lg">
                           {bubble.text}
                         </p>
