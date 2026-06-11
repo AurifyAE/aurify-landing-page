@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbzKEbF23kDdQuLsDZFhEOlPY-5MXLKH3qlBUeByIY0tX1N-oaapSVmLTg75OAlNGlXd/exec";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbyNuUd6zq4-lKj9n34cN4q1vLnLatZuTYn9-cFt02c3pHgsaAHnOLl3fUZ7SgH3sj-Z/exec";
 const PRODUCTS = [
   "Aurify Bullion Pro",
   "Aurify Refinex",

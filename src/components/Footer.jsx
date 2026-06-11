@@ -50,14 +50,14 @@ export default function Footer() {
         </p>
 
         {/* Right - address + contact */}
-        <div className="text-right text-[11px] text-gray-500 leading-relaxed">
+        <div className="text-right text-[12px] text-gray-500 leading-relaxed">
           <p>Suite No.1035, Al Rayyan Building, Al Nahda, UAE</p>
           <p>
             <a href="tel:+97158 502 3411" className="hover:text-[#0077B6] transition-colors duration-200 mr-3">
               +971 58 502 3411
             </a>
-            <a href="mailto:info@aurify.ae" className="hover:text-[#0077B6] transition-colors duration-200">
-              info@aurify.ae
+            <a href="mailto:info@aurify.global" className="hover:text-[#0077B6] transition-colors duration-200">
+              info@aurify.global
             </a>
           </p>
         </div>

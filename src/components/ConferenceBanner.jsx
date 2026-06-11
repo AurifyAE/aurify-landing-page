@@ -15,7 +15,7 @@ export default function ConferenceBanner() {
     <section className="w-full flex justify-center px-4 py-10 font-sans" ref={ref}>
 
       {/* ── DESKTOP (sm+) — unchanged ── */}
-      <div className="relative w-full max-w-7xl min-h-[400px] overflow-hidden rounded-[160px] bg-[#ddeef8] hidden sm:block">
+      <div className="relative w-full max-w-7xl min-h-[480px] overflow-hidden rounded-[160px] bg-[#ddeef8] hidden sm:block">
         {/* Right skyline */}
         <div
           className="absolute inset-y-0 right-0 w-[60%] overflow-hidden"
@@ -50,27 +50,27 @@ export default function ConferenceBanner() {
             </span>
           </motion.div>
 
-          <motion.p style={{ fontSize: "15px", fontWeight: 700, color: "#0d1f33", lineHeight: 1.45, marginBottom: "10px" }} {...fadeUp(0.18)}>
+          <motion.p style={{ fontSize: "18px", fontWeight: 700, color: "#0d1f33", lineHeight: 1.45, marginBottom: "10px" }} {...fadeUp(0.18)}>
             Meet our CEO in person at the Asia Pacific Metals Conference.
           </motion.p>
-          <motion.p style={{ fontSize: "14px", fontWeight: 600, color: "#0d1f33", lineHeight: 1.45, marginBottom: "10px" }} {...fadeUp(0.18)}>
+          <motion.p style={{ fontSize: "16px", fontWeight: 600, color: "#0d1f33", lineHeight: 1.45, marginBottom: "10px" }} {...fadeUp(0.18)}>
             14-16 June 2026, Shangri-La Hotel | Singapore
           </motion.p>
 
           <motion.div style={{ marginBottom: "8px" }} {...fadeUp(0.26)}>
             {["Founder & CEO, Aurify Technology", "12+ years · Precious metals · Digital transformation"].map((line, i) => (
-              <p key={i} style={{ fontSize: "12px", color: "#1a1a1a", margin: "2px 0", lineHeight: 1.5 }}>{line}</p>
+              <p key={i} style={{ fontSize: "14px", color: "#1a1a1a", margin: "2px 0", lineHeight: 1.5 }}>{line}</p>
             ))}
           </motion.div>
 
-          <motion.p style={{ fontSize: "12px", color: "#1a1a1a", lineHeight: 1.65, marginBottom: "14px", maxWidth: "320px" }} {...fadeUp(0.32)}>
+          <motion.p style={{ fontSize: "14px", color: "#1a1a1a", lineHeight: 1.65, marginBottom: "14px", maxWidth: "320px" }} {...fadeUp(0.32)}>
             With over 12 years delivering ERP systems, SaaS platforms, compliance solutions,
             and blockchain traceability across refineries, bullion traders, and global institutional
             clients, our CEO has lived every challenge Aurify solves. Aurify is the product of that experience.
           </motion.p>
 
           <motion.div {...fadeUp(0.4)}>
-            <p style={{ fontSize: "11px", color: "#1a1a1a", marginBottom: "4px" }}>Fix a meeting or reach out directly</p>
+            <p style={{ fontSize: "12px", color: "#1a1a1a", marginBottom: "4px" }}>Fix a meeting or reach out directly</p>
             <div className="flex items-center gap-2">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1e85c4" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.1 6.1l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 15v1.92z" />
@@ -84,8 +84,8 @@ export default function ConferenceBanner() {
 
         {/* CEO name at seam */}
         <motion.div className="absolute bottom-11 z-30" style={{ left: "36%" }} {...fadeUp(0.48)}>
-          <p style={{ fontSize: "13px", fontWeight: 700, color: "#0d1f33", whiteSpace: "nowrap" }}>Muneeb Cholayil</p>
-          <p style={{ fontSize: "11px", color: "#3d5a73" }}>CEO &amp; Founder</p>
+          <p style={{ fontSize: "14px", fontWeight: 700, color: "#0d1f33", whiteSpace: "nowrap" }}>Muneeb Cholayil</p>
+          <p style={{ fontSize: "12px", color: "#3d5a73" }}>CEO &amp; Founder</p>
         </motion.div>
 
         {/* Muneeb cutout */}
