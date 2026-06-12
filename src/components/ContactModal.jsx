@@ -1,6 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbyNuUd6zq4-lKj9n34cN4q1vLnLatZuTYn9-cFt02c3pHgsaAHnOLl3fUZ7SgH3sj-Z/exec";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbwGnqjRgKK85WC4odGCg881Ez-0bOLcQJ2syOV0ayicqPWTpUFL6GwaN8DH3pc4qpv3/exec";
 const PRODUCTS = [
   "Aurify Bullion Pro",
   "Aurify Refinex",
@@ -15,7 +17,7 @@ const inputBase =
 
 export default function ContactModal({ isOpen, onClose }) {
   const [form, setForm] = useState({
-    name: "", company: "", role: "", email: "", product: "", headache: "",
+    name: "", company: "", role: "", email: "", phone: "", product: "", headache: "",
   });
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -146,6 +148,22 @@ export default function ContactModal({ isOpen, onClose }) {
                         className={inputBase}
                       />
                     </div>
+                  </div>
+
+                  {/* Row 3: Phone */}
+                  <div className="mb-4">
+                    <label className="block text-[11px] sm:text-[12px] font-semibold text-[#111827] mb-1.5">Phone number</label>
+                    <PhoneInput
+                      international
+                      countryCallingCodeEditable={false}
+                      defaultCountry="AE"
+                      value={form.phone}
+                      onChange={(value) => setForm((prev) => ({ ...prev, phone: value || "" }))}
+                      placeholder="Phone number"
+                      className="contact-phone-input w-full h-10 border border-[#d1d5db] rounded-[6px] bg-white text-[13px] text-[#111827] outline-none transition-colors duration-150 font-[inherit] box-border"
+                      numberInputProps={{ className: "outline-none bg-transparent font-[inherit] text-[13px] text-[#111827] placeholder-[#9ca3af]" }}
+                      required
+                    />
                   </div>
 
                   {/* Dropdown */}

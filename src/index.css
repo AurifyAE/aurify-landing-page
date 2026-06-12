@@ -31,6 +31,57 @@ a, button {
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Phone input (react-phone-number-input) to match contact form fields */
+.contact-phone-input {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+  transition: border-color 0.15s;
+}
+.contact-phone-input:focus-within {
+  border-color: #6b7280;
+}
+.contact-phone-input .PhoneInputCountry {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0 10px;
+  border-right: 1px solid #d1d5db;
+  background: #f9fafb;
+  border-radius: 6px 0 0 6px;
+}
+.contact-phone-input .PhoneInputCountryIcon {
+  width: 22px;
+  height: 16px;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+.contact-phone-input .PhoneInputCountryIcon--border {
+  background-color: transparent;
+}
+.contact-phone-input .PhoneInputCountrySelect {
+  cursor: pointer;
+}
+.contact-phone-input .PhoneInputCountrySelectArrow {
+  width: 6px;
+  height: 6px;
+  margin-left: 6px;
+  border-width: 1.6px;
+  border-color: #6b7280;
+  opacity: 1;
+}
+.contact-phone-input .PhoneInputInput {
+  border: none;
+  outline: none;
+  background: transparent;
+  flex: 1;
+  min-width: 0;
+  padding: 2.5px 12px;
+}
+
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   html {
